@@ -21,12 +21,11 @@ class UploadCSVView(TemplateView):
             try:
                 self.add_records_no_duplicates(df) if settings.UPDATE_IF_DATA else self.add_records(df)
             except KeyError:
-                messages.error(request, "File format not matching")
+                messages.error(request, "File format is not matching")
                 return render(request, self.template_name)
             return redirect('view-data')
         else:
-            messages.error(request, form.errors.get(
-                "csvfile", "Unknown error"))
+            messages.error(request, "CSV File is Required")
             return render(request, self.template_name)
 
     def get_csvdata(self, File):
