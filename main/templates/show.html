@@ -1,25 +1,32 @@
 {% extends 'base.html'%}
+{% load static%}
 
 {%block title%}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css"  href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <title>Show Table Data</title>
 {%endblock%}
 {% block body %}
-<div class="container">
+<div class="container-fluid">
   {%if spacexlaunch_list%}
-<table class="table">
+  <div class="row ">
+    <div class="col-10">
+<table class="table table-striped table-bordered sortable">
     <thead>
       <tr>
-        <th scope="col">Flight Number</th>
-        <th scope="col">Date</th>
-        <th scope="col">Time</th>
-        <th scope="col">Booster Version</th>
-        <th scope="col">Launch Site</th>
-        <th scope="col">Payload</th>
-        <th scope="col">Payload Weight</th>
-        <th scope="col">Orbit</th>
-        <th scope="col">Customer</th>
-        <th scope="col">Mission Result</th>
-        <th scope="col">Landing Result</th>
+        <th scope="col">Flight Number <i class="bi bi-sort-down"></i></th>
+        <th scope="col">Date <i class="bi bi-sort-down"></i></th>
+        <th scope="col">Time <i class="bi bi-sort-down"></i></th>
+        <th scope="col">Booster Version <i class="bi bi-sort-down"></i></th>
+        <th scope="col">Launch Site <i class="bi bi-sort-down"></i></th>
+        <th scope="col">Payload <i class="bi bi-sort-down"></i></th>
+        <th scope="col">Payload Weight <i class="bi bi-sort-down"></i></th>
+        <th scope="col">Orbit <i class="bi bi-sort-down"></i></th>
+        <th scope="col">Customer <i class="bi bi-sort-down"></i></th>
+        <th scope="col">Mission Result <i class="bi bi-sort-down"></i></th>
+        <th scope="col">Landing Result <i class="bi bi-sort-down"></i></th>
       </tr>
     </thead>
     <tbody>
@@ -41,16 +48,85 @@
       {% endfor %}
     </tbody>
   </table>
+    </div>
+    <div class="col-2">
+      <div class="row">
+        <div class="container mt-4">
+          <h4 class="text-center">
+            Filter Section
+          </h4>
+        </div>
+        <div>
+            <label class="form-label" for="flight_number">Flight Number</label>
+            <input type="text" class="form-control" id="id_flightnumber" name="flight_number" />
+          </div>
+          <div class="col-6">
+            <label class="form-label" for="flight_number">Date From</label>
+            <input type="date" class="form-control" id="id_date_from" name="date_from" />
+          </div>
+          <div class="col-6">
+            <label class="form-label" for="flight_number">Date to</label>
+            <input type="date" class="form-control" id="id_date_to" name="date_to" />
+          </div>
+          <div class="col-6">
+            <label class="form-label" for="flight_number">Time From</label>
+            <input type="time" class="form-control" id="id_time_from" name="time_from" />
+          </div>
+          <div class="col-6">
+            <label class="form-label" for="flight_number">Time To</label>
+            <input type="time" class="form-control" id="id_time_to" name="time_to" />
+          </div>
+          <div>
+            <label class="form-label" for="booster_version">Booster Version</label>
+            <input type="text" class="form-control" id="id_booster_version" name="booster_version" />
+          </div>
+          <div>
+            <label class="form-label" for="launch_site">Launch Site</label>
+            <input type="text" class="form-control" id="id_launch_site" name="launch_site" />
+          </div>
+
+          <div>
+            <label class="form-label" for="payload">Payload</label>
+            <input type="text" class="form-control" id="id_payload" name="payload" />
+          </div>
+          <div>
+            <label class="form-label" for="payload_weight">Payload Weight</label>
+            <input type="text" class="form-control" id="id_payload_weight" name="payload_weight" />
+          </div>
+          <div>
+            <label class="form-label" for="orbit">Orbit</label>
+            <input type="text" class="form-control" id="id_orbit" name="orbit" />
+          </div>
+          <div>
+            <label class="form-label" for="customer">Customer</label>
+            <input type="text" class="form-control" id="id_customer" name="customer" />
+          </div>
+          <div>
+            <label class="form-label" for="mission_result">Mission Result</label>
+            <input type="text" class="form-control" id="id_mission_result" name="mission_result" />
+          </div>
+          <div>
+            <label class="form-label" for="landing_result">Landing Result</label>
+            <input type="text" class="form-control" id="id_landing_result" name="landing_result" />
+          </div>
+
+          <div class="container py-4">
+            <button class="btn btn-success"> Apply Filter</button>
+          </div>
+          
+
+          
+          
+      </div>
+    </div>
+  </div>
 
 {%else%}
-<div class="align-middle">
-  <h3>
-      No data to show
-  </h3>
-</div>
+{%include 'no_data.html'%}
 {%endif%}
 </div>
+{% endblock %}
 
-
-  
+{% block extrascripts %}
+  <script defer type="text/JavaScript" src="{% static 'js/manual.js' %}"></script>
 {% endblock %}

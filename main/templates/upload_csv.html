@@ -6,16 +6,15 @@
 {% block body %}
 
 
-<div class="container d-flex">
-    <div class="align-items-center">
+<div class="d-flex flex-column vh-100 min-vw-100">
+    <div class="d-flex flex-grow-1 justify-content-center align-items-center text-center">
         <form method="post" enctype="multipart/form-data" >
             {% csrf_token %}
-           
-          
-    <label class="form-label" for="CSVFile">Upload CSV</label>
-    <input type="file" class="form-control" id="CSVFile" name="csv-file" accept=".csv"/>
-    <button class="btn btn-success " type="submit">Upload file</button>
-</form>
+            <label class="form-label" for="CSVFile">Upload CSV</label>
+            <input type="file" class="form-control my-2" id="CSVFile" name="csvfile" accept=".csv"/>
+            <button class="btn btn-success my-2" type="submit">Upload file</button>
+        </form>
 </div>
 </div>
+
 {% endblock %}
