@@ -1,0 +1,56 @@
+{% extends 'base.html'%}
+
+{%block title%}
+<title>Show Table Data</title>
+{%endblock%}
+{% block body %}
+<div class="container">
+  {%if spacexlaunch_list%}
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Flight Number</th>
+        <th scope="col">Date</th>
+        <th scope="col">Time</th>
+        <th scope="col">Booster Version</th>
+        <th scope="col">Launch Site</th>
+        <th scope="col">Payload</th>
+        <th scope="col">Payload Weight</th>
+        <th scope="col">Orbit</th>
+        <th scope="col">Customer</th>
+        <th scope="col">Mission Result</th>
+        <th scope="col">Landing Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for data in spacexlaunch_list%}
+      <tr>
+        <td>{{data.flight_number}}</td>
+        <td>{{data.date}}</td>
+        <td>{{data.time}}</td>
+        <td>{{data.booster_version}}</td>
+        <td>{{data.launch_site}}</td>
+        <td>{{data.payload}}</td>
+        <td>{{data.payload_weight}}</td>
+        <td>{{data.orbit}}</td>
+        <td>{{data.customer}}</td>
+        <td>{{data.mission_result}}</td>
+        <td>{{data.landing_result}}</td>
+        
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{%else%}
+<div class="align-middle">
+  <h3>
+      No data to show
+  </h3>
+</div>
+{%endif%}
+</div>
+
+
+  
+{% endblock %}
