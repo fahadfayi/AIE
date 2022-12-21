@@ -47,11 +47,7 @@ $(document).ready(function() {
 
 
     $('#reset').on('click', function(){
-        $(':input','#filter_form')
-  .not(':button, :submit, :reset, :hidden')
-  .val('')
-  .removeAttr('checked')
-  .removeAttr('selected');
+        window.location = window.location.href.split("?")[0];
     })
 
 });
