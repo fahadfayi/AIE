@@ -45,5 +45,13 @@ $(document).ready(function() {
         });
     });
 
-    $('.js-booster-version-multiple').select2();
+
+    $('#reset').on('click', function(){
+        $(':input','#filter_form')
+  .not(':button, :submit, :reset, :hidden')
+  .val('')
+  .removeAttr('checked')
+  .removeAttr('selected');
+    })
+
 });

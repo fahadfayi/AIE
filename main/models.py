@@ -15,6 +15,3 @@ class SpaceXLaunch(models.Model):
     customer = models.CharField(verbose_name="Customer", max_length=256,blank=False)
     mission_result = models.CharField(verbose_name="Mission Result", max_length=256,blank=False)
     landing_result = models.CharField(verbose_name="Landing Result", max_length=256,blank=False)
-
-    class meta:
-        db_table = 'space_x_launch'
