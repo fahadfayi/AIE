@@ -25,22 +25,28 @@ class UploadCSVView(TemplateView):
             except KeyError:
                 messages.error(request, "File format is not matching")
                 return render(request, self.template_name)
+            except AssertionError:
+                messages.error(request, "Empty File")
+                return render(request, self.template_name)
             return redirect('view-data')
         else:
             messages.error(request, "CSV File is Required")
             return render(request, self.template_name)
-
-    def get_csvdata(self, File):
-        csv_file = File
-        df = pd.read_csv(csv_file)
+    
+    def get_csvdata(self, csv_file):
+        try:
+            df = pd.read_csv(csv_file)
+        except UnicodeDecodeError:
+            df = pd.DataFrame()
         df = df.fillna(" ")
         if 'Booster Version' in df.columns.values:
-            df['Booster Version'] = df['Booster Version'].str.replace(' +', ' ')
+            df['Booster Version'] = df['Booster Version'].str.replace('\s+', ' ',regex=True)
         return df
 
     def add_records(self, df):
         
         for index, row in df.iterrows():
+            assert not df.empty
             SpaceXLaunch.objects.create(
                 flight_number=row['Flight Number'],
                 date=row['Date'],
@@ -56,6 +62,7 @@ class UploadCSVView(TemplateView):
             )
 
     def add_records_no_duplicates(self, df):
+        assert not df.empty
         for index, row in df.iterrows():
             SpaceXLaunch.objects.update_or_create(
                 
