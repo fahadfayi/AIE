@@ -65,19 +65,18 @@ class UploadCSVView(TemplateView):
         assert not df.empty
         for index, row in df.iterrows():
             SpaceXLaunch.objects.update_or_create(
-                
-                date=row['Date'],
-                time=row['Time (UTC)'],
-                booster_version=row['Booster Version'],
-                payload=row['Payload'],
-                payload_weight=row['Payload Mass (kg)'],
-                orbit=row['Orbit'],
-                mission_result=row['Mission Outcome'],
-                landing_result=row['Landing Outcome'],
+                flight_number=row['Flight Number'],
+                launch_site = row['Launch Site'],
+                customer = row['Customer'],
                 defaults={
-                        'flight_number':row['Flight Number'],
-                        'launch_site': row['Launch Site'],
-                        'customer':row['Customer'],
+                'date':row['Date'],
+                'time':row['Time (UTC)'],
+                'booster_version':row['Booster Version'],
+                'payload':row['Payload'],
+                'payload_weight':row['Payload Mass (kg)'],
+                'orbit':row['Orbit'],
+                'mission_result':row['Mission Outcome'],
+                'landing_result':row['Landing Outcome'],
                     },
             )
 
