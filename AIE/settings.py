@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 
 ENABLE_DATATABLE = False # set true to enable data table (3rd party javascript library)
 UPDATE_IF_DATA = True # set true to enable update if data is present
+CLEAN_DATA = True # set true clean data clean data
 
 
 # Application definition

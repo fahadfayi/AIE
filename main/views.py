@@ -41,6 +41,8 @@ class UploadCSVView(TemplateView):
         df = df.fillna(" ")
         if 'Booster Version' in df.columns.values:
             df['Booster Version'] = df['Booster Version'].str.replace('\s+', ' ',regex=True)
+        if 'Payload Mass (kg)' in df.columns.values and settings.CLEAN_DATA:
+            df['Payload Mass (kg)'] = df['Payload Mass (kg)'].str.extract('([a-zA-Z0-9\s,]+)')
         return df
 
     def add_records(self, df):
